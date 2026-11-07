@@ -7,6 +7,10 @@ import {
 	fold,
 	hash,
 } from "@errata/core";
+import { type ModelSnapshot, restoreModels } from "./models.js";
+
+export { modelItem, modelSnapshotSchema, restoreModels } from "./models.js";
+
 import { MemWal, type MemWalConfig } from "@mysten-incubation/memwal";
 export type MemoryClient = Pick<
 	MemWal,
@@ -116,6 +120,7 @@ export async function flush(
 }
 export interface RestoreResult {
 	beliefs: Map<string, Folded>;
+	models: ModelSnapshot[];
 	warnings: string[];
 	hash: string;
 	complete: boolean;
@@ -128,17 +133,33 @@ export async function restore(
 		warnings: string[] = [];
 	let cursor: string | undefined;
 	const cursors = new Set<string>();
+	let models: ModelSnapshot[] = [];
 	do {
 		await pace();
 		const page = await client.listNamespaces({ cursor, limit: 100 });
 		for (const entry of page.namespaces) {
+			if (entry.name === "errata-model") {
+				const result = await restoreModels(client, pace);
+				models = result.snapshots;
+				warnings.push(...result.warnings);
+				if (models.length < entry.memory_count)
+					warnings.push("errata-model: incomplete recall");
+				continue;
+			}
 			if (!/^errata-b-[a-f0-9]+$/.test(entry.name)) continue;
 			await pace();
 			const result = await client.recall({
-				query: "",
+				query: "Errata belief event history",
 				namespace: entry.name,
 				limit: 100,
 			});
+			if (
+				typeof entry.memory_count === "number" &&
+				result.results.length < entry.memory_count
+			)
+				warnings.push(
+					`${entry.name}: recall returned fewer records than namespace count`,
+				);
 			if (result.results.length === 100)
 				warnings.push(
 					`${entry.name}: recall limit reached; history may be truncated`,
@@ -178,7 +199,13 @@ export async function restore(
 				.map(([key, value]) => ({ key, events: value.events })),
 		),
 	);
-	return { beliefs, warnings, hash: digest, complete: warnings.length === 0 };
+	return {
+		beliefs,
+		models,
+		warnings,
+		hash: hash(canonical({ beliefs: digest, models })),
+		complete: warnings.length === 0,
+	};
 }
 /** Replace cache only after a complete restore; preserve the previous cache on any warning. */
 export async function rebuild(

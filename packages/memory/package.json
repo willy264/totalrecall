@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@errata/core": "workspace:*",
-		"@mysten-incubation/memwal": "0.1.13"
+		"@mysten-incubation/memwal": "0.1.13",
+		"zod": "4.6.7"
 	}
 }
