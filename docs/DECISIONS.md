@@ -61,3 +61,15 @@ Agent flows require actor-bound confirmation, serialize belief work through the 
 The runtime MCP process returns setup status/hold until real adapters are supplied. Telegram handler factory enforces an allowlist; webhook factory uses constant-time secret comparison. The public webhook route stays disabled (503). Provider keys and model IDs are passed explicitly to the LLM factory; no hardcoded Groq model. Gemini fallback must only receive non-sensitive intake.
 
 Web shells use CSS directly for the paper/ink/red visual system (no Tailwind dependency needed for these shells). No figures, old values, corrections or proof links are fabricated. Public counts remain null until verified. Local production build and HTTP smoke checks passed. Headless Edge screenshot attempt was rejected by automatic policy (blocked by policy); visual/accessibility inspection remains pending.
+
+## 7 November: final credential-free batch
+
+The user authorized https://github.com/willy264/totalrecall.git and asked for incremental pushes. No remote or push existed before that instruction. Existing commits were then pushed chronologically, followed by separate scheduler, operations and test feature commits. No history was rewritten.
+
+Model snapshot validation now lives in core; newly generated snapshots explicitly carry model_update and checker metadata, provenance and cause. Legacy sample snapshot fixtures remain readable. Scheduler persistence is an atomic store contract; live database composition remains gated on M0. Scheduled/manual Actions tick defaults to dry-run and exposes only checker/account/Tatum/database secrets to its gated live step. The live entry point currently refuses execution until M0 and composition are completed.
+
+Proof scripts output only selected public identifiers, counts by provenance, expiry and checkpoint; missing credentials produce unavailable reports rather than zeros presented as live counts. Samples and replay are not added to the live count.
+
+Benchmark A/C/D harness supports the preregistered balance-floor primary corpus. Trained parameters are immutable during scoring, train/test addresses must be disjoint, reference truth does not drive read scheduling, and sample scorer output is not written as benchmark results.
+
+Mobile E2E code is present but browser execution was policy-blocked. Production fixture replacement, live proof, live scheduler composition and full submission evidence wait for M0. The owner requested stopping after this batch and waiting for credentials.

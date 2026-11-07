@@ -33,3 +33,17 @@ The full Turbo run passed 16 tasks with 49 tests before the two additional tests
 Next 16.4.5 production build passed. Local HTTP smoke tests returned 200 for /, /beliefs, /learning, /bench, /proof, /agents, /status and /beliefs/ab. /api/status reports setup mode, null counts and disabled adapters. POST /api/telegram/test returned 503. No claim is made about browser visual correctness or WCAG compliance; screenshot execution was policy-blocked.
 
 Drizzle generated 0000_daily_saracen.sql for nine tables. Migration was not applied; PostgreSQL concurrency, leases and SQL behavior still require an actual database test. No credentialed M0 script, scored benchmark, public deployment, bot message or publication ran in this continuation.
+
+## 7 November: scheduler, proof scripts and scorer
+
+The full Turbo run passed 18 tasks and 63 tests: core 34, chain 6, memory 6, LLM 4, agents 5, MCP 1, Telegram helpers 2, benchmark scorer 5. Scheduler/memory/agent suites were rerun after adding explicit model_update metadata and passed. The rebuild test wipes the fake cache, follows paginated listNamespaces, recalls at limit 100, folds events and models, and asserts the identical guard result. This remains sample evidence.
+
+Dry tick executed without keys: no checks/writes; due count unknown. verify-memories and proof were executed with credential variables removed: each exited 1 and wrote unavailable JSON with null counts/checkpoint. No successful live verification is claimed. No scored replay run occurred.
+
+Playwright contains 16 cases across iPhone 13 and Pixel 7 Chromium emulation, asserting no horizontal scroll and visible navigation/headings. Browser installation succeeded, but the execution command was rejected by automatic policy (blocked by policy). E2E therefore remains NOT RUN, not passed. No screenshot workaround was attempted.
+
+Review found the earlier Biome migration had set preset:none. That meant earlier checks did not exercise the recommended lint rules, despite the command succeeding. Restored preset:recommended and ran it successfully; fixed environment declarations and type import formatting.
+
+GitHub CI now runs on the authorized public repository. Verified successful runs include https://github.com/willy264/totalrecall/actions/runs/42386607019 and https://github.com/willy264/totalrecall/actions/runs/42386739291 . Intermediate feature commits lacked later workspace/lockfile changes and some failed; do not treat those as passing.
+
+Dependency audit identified a moderate development-only esbuild 0.18.20 advisory through drizzle-kit. Added a targeted override to 0.25.12; drizzle-kit generate succeeded with no schema changes, and a full pnpm audit reported zero known vulnerabilities. This does not establish absence of all security defects.
