@@ -291,3 +291,10 @@ export const unavailableApi: AgentApi = {
 	},
 	status: async () => ({ mode: "setup", m0: "pending", liveAdapters: false }),
 };
+
+export {
+	type CheckObservation,
+	type DueBelief,
+	type SchedulerStore,
+	tick,
+} from "./scheduler.js";

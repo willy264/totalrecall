@@ -336,3 +336,12 @@ export function guardDecision(
 	}
 	return { decision: reasons.length ? "hold" : "proceed", beliefs, reasons };
 }
+
+export {
+	isDue,
+	type ModelSnapshot,
+	modelSnapshotSchema,
+	nextCheckAt,
+	type ScheduleState,
+	updateSchedule,
+} from "./scheduler.js";
