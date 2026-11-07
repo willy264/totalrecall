@@ -11,7 +11,8 @@
 		"lint": "biome check .",
 		"format": "biome check --write .",
 		"test": "turbo run test",
-		"secret-scan": "tsx scripts/secret-scan.ts"
+		"secret-scan": "tsx scripts/secret-scan.ts",
+		"e2e": "playwright test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.6.5",
@@ -22,7 +23,8 @@
 		"vitest": "5.1.0",
 		"drizzle-kit": "0.31.11",
 		"@types/react": "^19.0.0",
-		"@types/react-dom": "^19.0.0"
+		"@types/react-dom": "^19.0.0",
+		"@playwright/test": "1.65.0"
 	},
 	"dependencies": {
 		"@grpc/grpc-js": "1.14.7",

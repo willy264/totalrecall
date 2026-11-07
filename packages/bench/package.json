@@ -2,5 +2,13 @@
 	"name": "@errata/bench",
 	"version": "0.0.0",
 	"private": true,
-	"type": "module"
+	"type": "module",
+	"exports": "./src/index.ts",
+	"dependencies": {
+		"@errata/core": "workspace:*"
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"test": "vitest run"
+	}
 }
