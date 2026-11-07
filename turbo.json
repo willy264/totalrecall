@@ -1,1 +1,16 @@
-{"tasks":{"typecheck":{"dependsOn":["^typecheck"]},"test":{"dependsOn":["^typecheck"],"outputs":[]}}}
+{
+	"tasks": {
+		"typecheck": {
+			"dependsOn": ["^typecheck"]
+		},
+		"test": {
+			"dependsOn": ["^typecheck"],
+			"outputs": []
+		}
+	},
+	"globalPassThroughEnv": [
+		"MEMWAL_SERVER_URL",
+		"TATUM_SUI_GRPC",
+		"M0_COIN_TYPE"
+	]
+}

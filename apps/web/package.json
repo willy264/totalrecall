@@ -1,6 +1,6 @@
 {
-  "name": "@errata/web",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module"
+	"name": "@errata/web",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module"
 }

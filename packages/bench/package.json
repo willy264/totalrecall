@@ -1,6 +1,6 @@
 {
-  "name": "@errata/bench",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module"
+	"name": "@errata/bench",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module"
 }
