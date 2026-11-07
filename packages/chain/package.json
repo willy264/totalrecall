@@ -2,5 +2,16 @@
 	"name": "@errata/chain",
 	"version": "0.0.0",
 	"private": true,
-	"type": "module"
+	"type": "module",
+	"exports": "./src/index.ts",
+	"scripts": {
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"test": "vitest run --passWithNoTests"
+	},
+	"dependencies": {
+		"@errata/core": "workspace:*",
+		"@grpc/grpc-js": "1.14.7",
+		"@mysten/sui": "2.39.1",
+		"@protobuf-ts/grpc-transport": "2.11.1"
+	}
 }
