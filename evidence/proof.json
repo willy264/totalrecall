@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"generatedAt": "2026-11-07T15:28:01.320Z",
+	"provenance": "live",
+	"status": "unavailable",
+	"network": "mainnet",
+	"accountId": null,
+	"accountVerified": false,
+	"checkpoint": null,
+	"memories": {
+		"schemaVersion": 1,
+		"generatedAt": "2026-11-07T15:28:01.316Z",
+		"provenance": "live",
+		"status": "unavailable",
+		"network": null,
+		"counts": null,
+		"blobs": [],
+		"warnings": ["Missing memory credentials; no live verification ran"]
+	},
+	"warnings": ["Tatum/account credentials absent; chain proof not attempted"]
+}

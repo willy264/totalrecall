@@ -1,0 +1,42 @@
+name: Memory tick
+on:
+  schedule:
+    - cron: "17,47 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "No keys or live calls"
+        type: boolean
+        default: true
+permissions:
+  contents: read
+concurrency:
+  group: errata-memory-tick
+  cancel-in-progress: false
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --global pnpm@12.18.0
+      - run: pnpm install --frozen-lockfile
+      - name: Dry run (default until M0 and live composition pass)
+        if: ${{ vars.ERRATA_LIVE_TICK != 'true' || (github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        run: pnpm exec tsx scripts/tick.ts --dry-run
+      - name: Live tick (gated, checker key only)
+        if: ${{ vars.ERRATA_LIVE_TICK == 'true' && !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        env:
+          MEMWAL_ACCOUNT_ID: ${{ secrets.MEMWAL_ACCOUNT_ID }}
+          MEMWAL_KEY_CHECKER: ${{ secrets.MEMWAL_KEY_CHECKER }}
+          TATUM_API_KEY: ${{ secrets.TATUM_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: pnpm exec tsx scripts/tick.ts --live
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tick-preflight
+          path: evidence/tick.json

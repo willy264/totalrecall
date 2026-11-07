@@ -11,6 +11,9 @@
 	"globalPassThroughEnv": [
 		"MEMWAL_SERVER_URL",
 		"TATUM_SUI_GRPC",
-		"M0_COIN_TYPE"
+		"M0_COIN_TYPE",
+		"MEMWAL_ACCOUNT_ID",
+		"MEMWAL_KEY_CHECKER",
+		"TATUM_API_KEY"
 	]
 }
