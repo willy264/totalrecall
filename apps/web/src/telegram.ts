@@ -1,5 +1,5 @@
 import { timingSafeEqual } from "node:crypto";
-import { type AgentApi } from "@errata/agents";
+import type { AgentApi } from "@errata/agents";
 import { Bot } from "grammy";
 export function validSecret(actual: string | null, expected: string): boolean {
 	if (!actual || !expected) return false;
