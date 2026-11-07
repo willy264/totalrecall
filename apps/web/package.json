@@ -2,5 +2,22 @@
 	"name": "@errata/web",
 	"version": "0.0.0",
 	"private": true,
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@errata/core": "workspace:*",
+		"@errata/llm": "workspace:*",
+		"next": "16.4.5",
+		"react": "19.3.1",
+		"react-dom": "19.3.1",
+		"grammy": "1.46.0",
+		"zod": "4.6.7",
+		"@errata/agents": "workspace:*"
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"test": "vitest run --passWithNoTests",
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	}
 }
