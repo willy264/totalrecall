@@ -23,3 +23,13 @@ All core test data is `sample`. No live chain or memory result is claimed.
 Mainnet writes, delegate interoperability, actual pagination/expiry, live Tatum reads, Vercel gRPC, credit costs, relayer rate limits, Groq extraction, historical GraphQL coverage, live rebuild, E2E, browser accessibility, and remote GitHub CI. No benchmark scoring has run. CI is configured locally, not published or executed on GitHub.
 
 The rebuild unit test demonstrates pure serialization/folding behavior only. It does not prove recovery from Walrus or Neon.
+
+## Credential-free continuation ? 7 November, approximately 16:08 Lagos
+
+Passed: 51 tests total across core (30), chain (6), memory (5), LLM (4), agent service (3), MCP protocol (1), Telegram helpers (2). The MCP protocol test uses the SDK in-memory transport and does not send external messages. Chain/memory response fixtures are sample test doubles, not captured mainnet responses.
+
+The full Turbo run passed 16 tasks with 49 tests before the two additional tests; the affected memory, agent, and MCP suites were subsequently run and passed with the additions. Database's test task explicitly reports no tests; do not count it as database validation. Root typecheck and app/package typechecks passed. Biome formatting/lint passed.
+
+Next 16.4.5 production build passed. Local HTTP smoke tests returned 200 for /, /beliefs, /learning, /bench, /proof, /agents, /status and /beliefs/ab. /api/status reports setup mode, null counts and disabled adapters. POST /api/telegram/test returned 503. No claim is made about browser visual correctness or WCAG compliance; screenshot execution was policy-blocked.
+
+Drizzle generated 0000_daily_saracen.sql for nine tables. Migration was not applied; PostgreSQL concurrency, leases and SQL behavior still require an actual database test. No credentialed M0 script, scored benchmark, public deployment, bot message or publication ran in this continuation.

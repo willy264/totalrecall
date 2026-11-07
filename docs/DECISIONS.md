@@ -45,3 +45,19 @@ Follow-up: Seal 1.5.4 requires Sui ^2.39.1, so Sui is now pinned at 2.39.1. The 
 - 2026-11-07T14:41:09.730Z FAIL m0-tatum-graphql: Missing environment: TATUM_SUI_GRAPHQL
 
 - 2026-11-07T14:41:11.649Z FAIL m0-groq: Missing environment: GROQ_API_KEY
+
+## 2026-11-07 ? Credential-free adapters and interfaces
+
+Done: native Tatum adapter, typed name/balance/owner reads, serial pacing and injected shared pacer, bounded retries for 429/resource-exhausted/unavailable, request audit and credit reservation interfaces; MemWal wrapper and resumable bulk outbox; namespace/event/model restore; Drizzle migration; extraction fallback; shared agent service and MCP/Telegram handlers; Next page shells. No live adapter is enabled at startup.
+
+Changes: added packages/agents for IO orchestration so packages/core remains pure. PostgreSQL owns durable outbox leases and cross-process pacing. Credit cost remains unmeasured: per-call credits are null, while the budget table requires an explicitly configured conservative estimated cost before any reservation succeeds. No budget row is seeded, so background work fails closed. The per-process pacer is explicitly not a multi-process limiter. MemWal flush accepts an injected account-wide pacing callback; production wiring must budget bulk item counts, not merely HTTP requests.
+
+Fixtures: no recorded RPC responses were available without credentials. Chain contract fixtures are authored from installed SDK declarations and explicitly labelled sample, not recorded/live evidence. Replace or supplement them with redacted real captures after M0. There are no runtime fake chain/memory adapters.
+
+Rebuild restores model snapshots as well as beliefs, warns at recall limit 100, compares namespace counts, rejects corrupt/forked/incomplete histories, and preserves the old cache unless a complete staged result passes its expected hash. Semantic recall completeness is still a live M0 risk. No Neon or Walrus rebuild has been exercised.
+
+Agent flows require actor-bound confirmation, serialize belief work through the Store contract, reload heads under the lock, and store contradiction/correction before returning a hold. Balance floors remain owner constraints: a mismatch must not silently lower the floor. Missing names and non-address ownership remain contradicted without inventing replacement addresses. Live Store composition, daily confirmation summaries, index publication, model snapshot scheduling and correction notifications remain for post-M0 integration.
+
+The runtime MCP process returns setup status/hold until real adapters are supplied. Telegram handler factory enforces an allowlist; webhook factory uses constant-time secret comparison. The public webhook route stays disabled (503). Provider keys and model IDs are passed explicitly to the LLM factory; no hardcoded Groq model. Gemini fallback must only receive non-sensitive intake.
+
+Web shells use CSS directly for the paper/ink/red visual system (no Tailwind dependency needed for these shells). No figures, old values, corrections or proof links are fabricated. Public counts remain null until verified. Local production build and HTTP smoke checks passed. Headless Edge screenshot attempt was rejected by automatic policy (blocked by policy); visual/accessibility inspection remains pending.
